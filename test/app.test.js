@@ -33,6 +33,17 @@ test("decision search supports offense type (partial, case-insensitive) and year
   assert.equal(response.body.items[0].id, "2023-3CD-2044");
 });
 
+test("decision search offense type filter handles Turkish locale case conversion", async () => {
+  const app = createApp();
+  const response = await request(app)
+    .get("/api/decisions")
+    .query({ offenseType: "HIRSIZLIK" });
+
+  assert.equal(response.status, 200);
+  assert.equal(response.body.total, 1);
+  assert.equal(response.body.items[0].offenseType, "Hırsızlık");
+});
+
 test("decision search clamps invalid pagination values", async () => {
   const app = createApp();
   const response = await request(app)
