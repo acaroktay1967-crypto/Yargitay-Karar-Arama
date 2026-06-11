@@ -49,12 +49,15 @@ function normalizeDecision(raw, sourceName, index) {
   const summary = String(raw.summary || raw.title || "").trim();
   const content = String(raw.content || raw.text || "").trim();
   const yearValue = Number.parseInt(raw.year, 10);
+  const hasValidYear = !Number.isNaN(yearValue);
+  const normalizedYear = hasValidYear ? yearValue : new Date().getFullYear();
 
   return {
     id,
     source: sourceName,
     chamber: String(raw.chamber || raw.daire || "Bilinmiyor"),
-    year: Number.isNaN(yearValue) ? new Date().getFullYear() : yearValue,
+    year: normalizedYear,
+    ...(hasValidYear ? {} : { sourceYearRaw: raw.year ?? null }),
     offenseType: String(raw.offenseType || classifyOffenseType(raw)),
     lawArticles: Array.isArray(raw.lawArticles)
       ? raw.lawArticles.map((item) => String(item))
@@ -128,7 +131,7 @@ async function saveGroupedDecisions(grouped, outputDir) {
   const savedFiles = [];
 
   for (const [offenseType, decisions] of Object.entries(grouped)) {
-    const fileName = `${slugify(offenseType || "diger") || "diger"}.json`;
+    const fileName = `${slugify(offenseType) || "diger"}.json`;
     const filePath = path.join(outputDir, fileName);
     const existing = await readExistingDecisions(filePath);
     const merged = dedupeById([...existing, ...decisions]);

@@ -8,7 +8,8 @@ function parseArgs(argv) {
     outputDir: path.resolve(process.cwd(), "src/data/by-offense"),
   };
 
-  for (let i = 0; i < argv.length; i += 1) {
+  let i = 0;
+  while (i < argv.length) {
     const token = argv[i];
     if (token === "--source" && argv[i + 1]) {
       options.sourceUrls.push(argv[i + 1]);
@@ -20,6 +21,7 @@ function parseArgs(argv) {
       options.outputDir = path.resolve(process.cwd(), argv[i + 1]);
       i += 1;
     }
+    i += 1;
   }
 
   return options;
