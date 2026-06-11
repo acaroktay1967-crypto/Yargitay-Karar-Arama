@@ -22,11 +22,11 @@ test("decision search supports text query", async () => {
   assert.equal(response.body.items[0].offenseType, "Uyuşturucu Madde Ticareti");
 });
 
-test("decision search supports offense type and year filters", async () => {
+test("decision search supports offense type (partial, case-insensitive) and year filters", async () => {
   const app = createApp();
   const response = await request(app)
     .get("/api/decisions")
-    .query({ offenseType: "Hırsızlık", year: 2023 });
+    .query({ offenseType: "hIRSIz", year: 2023 });
 
   assert.equal(response.status, 200);
   assert.equal(response.body.total, 1);

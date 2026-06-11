@@ -5,9 +5,15 @@ const MAX_PAGE = 1000;
 const MIN_YEAR = 1900;
 const MAX_YEAR = 2100;
 
+function normalizeText(value) {
+  return String(value || "")
+    .trim()
+    .toLocaleLowerCase("tr-TR");
+}
+
 function includesQueryText(decision, q) {
   if (!q) return true;
-  const normalizedQuery = q.trim().toLocaleLowerCase("tr-TR");
+  const normalizedQuery = normalizeText(q);
   if (!normalizedQuery) return true;
 
   const haystack = [
@@ -24,9 +30,16 @@ function includesQueryText(decision, q) {
   return haystack.includes(normalizedQuery);
 }
 
+function matchesOffenseType(value, offenseTypeFilter) {
+  if (!offenseTypeFilter) return true;
+  const normalizedFilter = normalizeText(offenseTypeFilter);
+  if (!normalizedFilter) return true;
+  return normalizeText(value).includes(normalizedFilter);
+}
+
 function filterDecisions(items, { q, offenseType, chamber, year }) {
   return items.filter((decision) => {
-    if (offenseType && decision.offenseType !== offenseType) return false;
+    if (!matchesOffenseType(decision.offenseType, offenseType)) return false;
     if (chamber && decision.chamber !== chamber) return false;
     if (year && decision.year !== year) return false;
     return includesQueryText(decision, q);

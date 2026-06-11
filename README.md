@@ -5,7 +5,7 @@ Suçlara ilişkin Yargıtay kararları için temel bir arama API MVP'si.
 ## Özellikler (MVP)
 
 - Kararları metin bazlı arama (`q`)
-- Suç türüne göre filtreleme (`offenseType`)
+- Suç türüne göre filtreleme (`offenseType`, kısmi ve büyük/küçük harf duyarsız)
 - Daireye göre filtreleme (`chamber`)
 - Yıla göre filtreleme (`year`)
 - Sayfalama (`page`, `pageSize`)
@@ -43,7 +43,7 @@ npm test
 Örnek:
 
 ```bash
-curl "http://localhost:3000/api/decisions?q=uyu%C5%9Fturucu&year=2022"
+curl "http://localhost:3000/api/decisions?q=uyu%C5%9Fturucu&offenseType=hirsiz&year=2022"
 ```
 
 ## Açık kaynak kaynaktan karar çekme ve suç türüne göre kaydetme
