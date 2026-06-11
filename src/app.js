@@ -1,6 +1,10 @@
 const express = require("express");
 const { decisions } = require("./data/decisions");
 
+const MAX_PAGE = 1000;
+const MIN_YEAR = 1900;
+const MAX_YEAR = 2100;
+
 function includesQueryText(decision, q) {
   if (!q) return true;
   const normalizedQuery = q.trim().toLocaleLowerCase("tr-TR");
@@ -39,11 +43,20 @@ function createApp() {
   app.get("/api/decisions", (req, res) => {
     const requestedPage = Number.parseInt(req.query.page, 10);
     const requestedPageSize = Number.parseInt(req.query.pageSize, 10);
-    const page = Number.isNaN(requestedPage) || requestedPage < 1 ? 1 : requestedPage;
+    const page = Number.isNaN(requestedPage) || requestedPage < 1
+      ? 1
+      : Math.min(requestedPage, MAX_PAGE);
     const pageSize = Number.isNaN(requestedPageSize)
       ? 10
       : Math.min(Math.max(requestedPageSize, 1), 100);
-    const year = req.query.year ? Number.parseInt(req.query.year, 10) : undefined;
+    const yearInput = req.query.year;
+    const year = yearInput ? Number.parseInt(yearInput, 10) : undefined;
+
+    if (yearInput && (Number.isNaN(year) || year < MIN_YEAR || year > MAX_YEAR)) {
+      return res.status(400).json({
+        error: `year ${MIN_YEAR}-${MAX_YEAR} aralığında bir sayı olmalıdır.`,
+      });
+    }
 
     const filtered = filterDecisions(decisions, {
       q: req.query.q,

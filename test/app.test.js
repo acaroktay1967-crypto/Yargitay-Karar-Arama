@@ -37,9 +37,30 @@ test("decision search clamps invalid pagination values", async () => {
   const app = createApp();
   const response = await request(app)
     .get("/api/decisions")
-    .query({ page: -5, pageSize: 999 });
+    .query({ page: 99999, pageSize: 999 });
 
   assert.equal(response.status, 200);
-  assert.equal(response.body.page, 1);
+  assert.equal(response.body.page, 1000);
   assert.equal(response.body.pageSize, 100);
+});
+
+test("decision search supports chamber filter", async () => {
+  const app = createApp();
+  const response = await request(app)
+    .get("/api/decisions")
+    .query({ chamber: "12. Ceza Dairesi" });
+
+  assert.equal(response.status, 200);
+  assert.equal(response.body.total, 1);
+  assert.equal(response.body.items[0].offenseType, "Cinsel Saldırı");
+});
+
+test("decision search rejects invalid year values", async () => {
+  const app = createApp();
+  const response = await request(app)
+    .get("/api/decisions")
+    .query({ year: "abc" });
+
+  assert.equal(response.status, 400);
+  assert.match(response.body.error, /year/);
 });
