@@ -1,7 +1,7 @@
 {
   "name": "yargitay-karar-arama",
   "version": "1.0.0",
-  "description": "Büyük bir Yargıtay kararları deposu hazırlayarak zaman içinde içtihadlarda değişiklikleri",
+  "description": "Suçlara ilişkin Yargıtay kararlarını aramak için geliştirilen MVP API projesi.",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",

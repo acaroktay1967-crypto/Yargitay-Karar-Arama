@@ -43,5 +43,5 @@ npm test
 Örnek:
 
 ```bash
-curl "http://localhost:3000/api/decisions?q=uyusturucu&year=2022"
+curl "http://localhost:3000/api/decisions?q=uyu%C5%9Fturucu&year=2022"
 ```
