@@ -5,7 +5,8 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
-    "test": "node --test"
+    "test": "node --test",
+    "ingest": "node src/cli/ingest.js"
   },
   "repository": {
     "type": "git",
