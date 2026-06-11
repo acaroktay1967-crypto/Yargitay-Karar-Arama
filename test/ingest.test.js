@@ -46,31 +46,6 @@ test("fetchSourceDecisions reads items and normalizes values", async (t) => {
     global.fetch = originalFetch;
   });
 
-  test("fetchSourceDecisions preserves invalid source year as metadata", async (t) => {
-    const originalFetch = global.fetch;
-    t.after(() => {
-      global.fetch = originalFetch;
-    });
-
-    global.fetch = async () => ({
-      ok: true,
-      json: async () => ({
-        items: [
-          {
-            id: "B-2",
-            title: "Belirsiz yıl içeren kayıt",
-            text: "Görevi kötüye kullanma suçu değerlendirilmiştir.",
-            year: "yok",
-          },
-        ],
-      }),
-    });
-
-    const items = await fetchSourceDecisions("https://example.org/decisions", "gorev");
-    assert.equal(items.length, 1);
-    assert.equal(items[0].sourceYearRaw, "yok");
-  });
-
   global.fetch = async () => ({
     ok: true,
     json: async () => ({
@@ -91,6 +66,31 @@ test("fetchSourceDecisions reads items and normalizes values", async (t) => {
   assert.equal(items[0].offenseType, "Hırsızlık");
   assert.equal(items[0].year, 2024);
   assert.equal(items[0].source, "example.org");
+});
+
+test("fetchSourceDecisions preserves invalid source year as metadata", async (t) => {
+  const originalFetch = global.fetch;
+  t.after(() => {
+    global.fetch = originalFetch;
+  });
+
+  global.fetch = async () => ({
+    ok: true,
+    json: async () => ({
+      items: [
+        {
+          id: "B-2",
+          title: "Belirsiz yıl içeren kayıt",
+          text: "Görevi kötüye kullanma suçu değerlendirilmiştir.",
+          year: "yok",
+        },
+      ],
+    }),
+  });
+
+  const items = await fetchSourceDecisions("https://example.org/decisions", "gorev");
+  assert.equal(items.length, 1);
+  assert.equal(items[0].sourceYearRaw, "yok");
 });
 
 test("ingestOpenSourceDecisions saves decisions grouped by offense", async (t) => {
