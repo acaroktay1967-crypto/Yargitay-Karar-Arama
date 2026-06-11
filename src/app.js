@@ -37,8 +37,12 @@ function createApp() {
   });
 
   app.get("/api/decisions", (req, res) => {
-    const page = Number.parseInt(req.query.page, 10) || 1;
-    const pageSize = Number.parseInt(req.query.pageSize, 10) || 10;
+    const requestedPage = Number.parseInt(req.query.page, 10);
+    const requestedPageSize = Number.parseInt(req.query.pageSize, 10);
+    const page = Number.isNaN(requestedPage) || requestedPage < 1 ? 1 : requestedPage;
+    const pageSize = Number.isNaN(requestedPageSize)
+      ? 10
+      : Math.min(Math.max(requestedPageSize, 1), 100);
     const year = req.query.year ? Number.parseInt(req.query.year, 10) : undefined;
 
     const filtered = filterDecisions(decisions, {

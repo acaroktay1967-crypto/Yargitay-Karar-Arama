@@ -32,3 +32,14 @@ test("decision search supports offense type and year filters", async () => {
   assert.equal(response.body.total, 1);
   assert.equal(response.body.items[0].id, "2023-3CD-2044");
 });
+
+test("decision search clamps invalid pagination values", async () => {
+  const app = createApp();
+  const response = await request(app)
+    .get("/api/decisions")
+    .query({ page: -5, pageSize: 999 });
+
+  assert.equal(response.status, 200);
+  assert.equal(response.body.page, 1);
+  assert.equal(response.body.pageSize, 100);
+});

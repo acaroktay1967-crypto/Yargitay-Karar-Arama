@@ -1,4 +1,4 @@
-# Yargitay-Karar-Arama
+# Yargıtay-Karar-Arama
 
 Suçlara ilişkin Yargıtay kararları için temel bir arama API MVP'si.
 
