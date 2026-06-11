@@ -1,5 +1,6 @@
 const fs = require("node:fs/promises");
 const path = require("node:path");
+const { randomUUID } = require("node:crypto");
 
 const OFFENSE_KEYWORDS = [
   { offenseType: "Hırsızlık", keywords: ["hırsızlık", "çalma", "nitelikli hırsızlık"] },
@@ -43,7 +44,7 @@ function classifyOffenseType(raw) {
 }
 
 function normalizeDecision(raw, sourceName, index) {
-  const idCandidate = raw.id || raw.decisionId || raw.no || `${sourceName}-${Date.now()}-${index}`;
+  const idCandidate = raw.id || raw.decisionId || raw.no || `${sourceName}-${index}-${randomUUID()}`;
   const id = String(idCandidate);
   const summary = String(raw.summary || raw.title || "").trim();
   const content = String(raw.content || raw.text || "").trim();
