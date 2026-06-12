@@ -75,3 +75,13 @@ test("decision search rejects invalid year values", async () => {
   assert.equal(response.status, 400);
   assert.match(response.body.error, /year/);
 });
+
+test("decision search rejects unrealistic future year values", async () => {
+  const app = createApp();
+  const response = await request(app)
+    .get("/api/decisions")
+    .query({ year: new Date().getFullYear() + 11 });
+
+  assert.equal(response.status, 400);
+  assert.match(response.body.error, /year/);
+});

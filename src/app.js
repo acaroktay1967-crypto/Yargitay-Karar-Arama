@@ -3,7 +3,7 @@ const { decisions } = require("./data/decisions");
 
 const MAX_PAGE = 1000;
 const MIN_YEAR = 1900;
-const MAX_YEAR = 2100;
+const MAX_YEAR = new Date().getFullYear() + 10;
 
 function normalizeText(value) {
   return String(value || "")

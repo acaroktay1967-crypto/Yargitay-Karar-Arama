@@ -42,11 +42,14 @@ test("parseArgs parses sources, query and output", () => {
 
 test("fetchSourceDecisions reads items and normalizes values", async (t) => {
   const originalFetch = global.fetch;
+  let capturedUrl;
   t.after(() => {
     global.fetch = originalFetch;
   });
 
-  global.fetch = async () => ({
+  global.fetch = async (url) => {
+    capturedUrl = String(url);
+    return ({
     ok: true,
     json: async () => ({
       items: [
@@ -59,13 +62,15 @@ test("fetchSourceDecisions reads items and normalizes values", async (t) => {
         },
       ],
     }),
-  });
+    });
+  };
 
   const items = await fetchSourceDecisions("https://example.org/decisions", "hırsızlık");
   assert.equal(items.length, 1);
   assert.equal(items[0].offenseType, "Hırsızlık");
   assert.equal(items[0].year, 2024);
   assert.equal(items[0].source, "example.org");
+  assert.match(capturedUrl, /[?&]q=h%C4%B1rs%C4%B1zl%C4%B1k/);
 });
 
 test("fetchSourceDecisions preserves invalid source year as metadata", async (t) => {
