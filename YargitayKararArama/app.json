@@ -1,0 +1,48 @@
+{
+  "expo": {
+    "name": "Yargıtay Karar Arama",
+    "slug": "yargitay-karar-arama",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1a1a2e"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.yargitay.karararama",
+      "buildNumber": "1",
+      "infoPlist": {
+        "CFBundleDisplayName": "Yargıtay Karar",
+        "NSCameraUsageDescription": "Belge tarama için kamera erişimi gereklidir.",
+        "UIBackgroundModes": []
+      }
+    },
+    "android": {
+      "package": "com.yargitay.karararama",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "backgroundColor": "#1a1a2e",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "permissions": []
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "yargitay-karar-arama"
+      }
+    }
+  }
+}
