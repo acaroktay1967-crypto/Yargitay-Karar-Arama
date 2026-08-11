@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Hukuk Pro - Kapsamlı Türk Hukuku Yazılımı. Dilekçe yazma, hâkim karar yazım sistemi, hesaplama araçları.">
+<title>Hukuk Pro — Profesyonel Hukuk Yazılımı</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Source+Sans+3:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="titlebar">
+  <span class="ico">⚖️</span>
+  <span class="ttl">HUKUK PRO — Profesyonel Hukuk Yazılımı</span>
+  <div class="sp"></div>
+  <span class="web-badge">🌐 Web Sürümü</span>
+</div>
+
+<div id="app">
+<!-- SIDEBAR -->
+<div id="sidebar">
+  <div class="sb-brand">
+    <div class="ico">⚖️</div>
+    <h2>HUKUK PRO</h2>
+    <small>v1.0.2 — 2024 Web</small>
+  </div>
+  <div class="sb-nav">
+    <div class="sb-sec">ANA</div>
+    <div class="sb-item active" id="nav-anasayfa" data-page="anasayfa"><span class="ico">🏠</span>Ana Sayfa</div>
+    <div class="sb-sec">BELGELER</div>
+    <div class="sb-item" id="nav-dilekce" data-page="dilekce"><span class="ico">📝</span>Dilekçe Yazma</div>
+    <div class="sb-item" id="nav-hakim" data-page="hakim"><span class="ico">⚖️</span>Hâkim Karar Yazım</div>
+    <div class="sb-item" id="nav-ornekler" data-page="ornekler"><span class="ico">📋</span>Karar Örnekleri</div>
+    <div class="sb-sec">ARAÇLAR</div>
+    <div class="sb-item" id="nav-hesaplama" data-page="hesaplama"><span class="ico">🧮</span>Harç & Hesaplama</div>
+    <div class="sb-item" id="nav-ustyargi" data-page="ustyargi"><span class="ico">📤</span>Üst Yargı Yolu</div>
+    <div class="sb-sec">DOSYALAR</div>
+    <div class="sb-item" id="nav-kayitli" data-page="kayitli"><span class="ico">💾</span>Kayıtlı Belgeler</div>
+  </div>
+  <div class="sb-footer">
+    <div class="sb-footer-btn" id="btn-temizle-tum">🗑️ Verileri Temizle</div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div id="content">
+
+<!-- ANA SAYFA -->
+<div class="page active" id="page-anasayfa">
+  <div class="pg-hd">
+    <span class="pg-ico">🏠</span>
+    <div><h1>Ana Sayfa</h1><p>Hoş Geldiniz — Hukuk Pro v1.0.2 Web Sürümü</p></div>
+    <div class="pg-acts">
+      <button class="pg-btn gold" id="btn-yeni-dilekce-ana">+ Yeni Dilekçe</button>
+      <button class="pg-btn" id="btn-yeni-karar-ana">+ Yeni Karar</button>
+    </div>
+  </div>
+  <div class="pg-body">
+    <div class="dash-grid">
+      <div class="dash-card" id="dc-dilekce"><div class="d-ico">📝</div><h3>Dilekçe Yazma</h3><p>44+ şablon ile dakikalar içinde dilekçe oluşturun</p><span class="d-cnt">44+ Şablon</span></div>
+      <div class="dash-card" id="dc-hakim"><div class="d-ico">⚖️</div><h3>Hâkim Karar Yazım</h3><p>28 dava türü, otomatik harç/ücret hesaplama</p><span class="d-cnt">28 Dava Türü</span></div>
+      <div class="dash-card" id="dc-ornekler"><div class="d-ico">📋</div><h3>Karar Örnekleri</h3><p>Hüküm, Taşınmaz, Nüfus, İcra karar örnekleri</p><span class="d-cnt">12 Karar</span></div>
+      <div class="dash-card" id="dc-hesaplama"><div class="d-ico">🧮</div><h3>Hesaplama</h3><p>Harç, vekâlet, inkar tazminatı, faiz — 2024</p><span class="d-cnt">2024 Tarife</span></div>
+      <div class="dash-card" id="dc-ustyargi"><div class="d-ico">📤</div><h3>Üst Yargı Yolu</h3><p>İstinaf, Temyiz, AYM, AİHM + süre hesaplayıcı</p><span class="d-cnt">4 Yol</span></div>
+      <div class="dash-card" id="dc-kayitli"><div class="d-ico">💾</div><h3>Kayıtlı Belgeler</h3><p>Oluşturduğunuz belgeleri yönetin</p><span class="d-cnt" id="belge-say">0 Belge</span></div>
+    </div>
+    <div class="dash-recent">
+      <div class="dr-ttl">⏱ Son İşlemler</div>
+      <div id="son-islemler" style="color:var(--muted);font-size:10px;padding:12px;text-align:center">Henüz kayıtlı belge yok.</div>
+    </div>
+  </div>
+</div>
+
+<!-- DİLEKÇE YAZMA -->
+<div class="page" id="page-dilekce">
+  <div class="pg-hd">
+    <span class="pg-ico">📝</span>
+    <div><h1>Dilekçe Yazma</h1><p>44+ Profesyonel Şablon Kütüphanesi</p></div>
+    <div class="pg-acts">
+      <button class="pg-btn" id="btn-dl-temizle">🗑 Temizle</button>
+      <button class="pg-btn" id="btn-dl-kaydet">💾 Kaydet</button>
+      <button class="pg-btn gold" id="btn-dl-yazdir">🖨 Yazdır</button>
+    </div>
+  </div>
+  <div style="flex:1;overflow:hidden">
+    <div class="dl-layout" style="height:100%">
+      <div class="dl-sablon">
+        <input id="sablon-ara" placeholder="🔍 Şablon ara..." style="width:100%;padding:5px 6px;border:1px solid var(--border);border-radius:3px;font-size:10px;margin-bottom:7px;background:var(--cream)">
+        <div id="sablon-listesi"></div>
+      </div>
+      <div class="dl-editor">
+        <div class="dl-toolbar">
+          <button class="tb-btn" data-ekle="DAVACI: ">Davacı</button>
+          <button class="tb-btn" data-ekle="DAVALI: ">Davalı</button>
+          <button class="tb-btn" data-ekle="MAHKEME: ">Mahkeme</button>
+          <button class="tb-btn" data-ekle="&#10;&#10;TALEP VE SONUÇ:&#10;">Talep</button>
+          <button class="tb-btn" data-ekle="&#10;&#10;KANUNİ DAYANAKLAR:&#10;">Kanuni Dayanak</button>
+          <button class="tb-btn" data-ekle="&#10;&#10;Saygılarımla,&#10;&#10;________________&#10;İmza / Tarih">İmza</button>
+        </div>
+        <textarea id="dilekce-text" placeholder="Soldan bir şablon seçin veya buraya yazın..."></textarea>
+      </div>
+      <div class="dl-info">
+        <div class="ip-sec">
+          <h4>📊 İstatistik</h4>
+          <div class="ip-stat"><span>Sözcük</span><span id="stat-kelime">0</span></div>
+          <div class="ip-stat"><span>Karakter</span><span id="stat-char">0</span></div>
+          <div class="ip-stat"><span>Cümle</span><span id="stat-cumle">0</span></div>
+          <div class="ip-stat"><span>Paragraf</span><span id="stat-para">0</span></div>
+        </div>
+        <div class="ip-sec">
+          <h4>💾 İşlemler</h4>
+          <button class="ip-btn" id="btn-dl-yazdir2">🖨 Yazdır</button>
+          <button class="ip-btn sec" id="btn-dl-kopyala">📋 Kopyala</button>
+          <button class="ip-btn sec" id="btn-dl-kaydet2">💾 Kaydet</button>
+          <button class="ip-btn sec" id="btn-dl-indir">📥 Word İndir</button>
+        </div>
+        <div><h4 style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:5px">Aktif Şablon</h4><div id="aktif-sablon" style="font-size:10px;color:var(--navy);font-weight:700">Seçilmedi</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HÂKİM KARAR -->
+<div class="page" id="page-hakim">
+  <div class="pg-hd">
+    <span class="pg-ico">⚖️</span>
+    <div><h1>Hâkim Karar Yazım Sistemi</h1><p>28 Dava Türü — 2024 Tarife Otomatik Hesaplama</p></div>
+    <div class="pg-acts">
+      <button class="pg-btn" id="btn-hk-sifirla">🗑 Sıfırla</button>
+      <button class="pg-btn" id="btn-hk-kaydet">💾 Kaydet</button>
+      <button class="pg-btn gold" id="btn-hk-yazdir">🖨 Yazdır</button>
+    </div>
+  </div>
+  <div style="flex:1;overflow:hidden">
+    <div class="hk-layout" style="height:100%">
+      <div class="hk-form">
+        <div class="ftabs">
+          <button class="ftab active" data-ftab="0">📋 Taraflar</button>
+          <button class="ftab" data-ftab="1">⚖️ Değer</button>
+          <button class="ftab" data-ftab="2">📝 Gerekçe</button>
+        </div>
+        <div class="ftab-pane active" id="ft0">
+          <div class="fsec">🏛 Mahkeme & Dosya</div>
+          <div class="fg2">
+            <div class="form-grp"><label>Mahkeme Adı</label><input id="f-mhk" placeholder="İstanbul 1. Asliye Hukuk"></div>
+            <div class="form-grp"><label>İl / İlçe</label><input id="f-il" placeholder="Kadıköy / İstanbul"></div>
+          </div>
+          <div class="fg3">
+            <div class="form-grp"><label>Esas No</label><input id="f-esas" placeholder="2024/1234"></div>
+            <div class="form-grp"><label>Karar No</label><input id="f-kno" placeholder="2024/567"></div>
+            <div class="form-grp"><label>Karar Tarihi</label><input id="f-ktar" type="date"></div>
+          </div>
+          <div class="fg2">
+            <div class="form-grp"><label>Hâkim</label><input id="f-hakim" placeholder="Ayşe YILMAZ"></div>
+            <div class="form-grp"><label>Sicil No</label><input id="f-sicil" placeholder="45678"></div>
+          </div>
+          <div class="form-grp"><label>Kâtip</label><input id="f-katip" placeholder="[KÂTİP ADI]"></div>
+          <div class="fsec">👤 Davacı</div>
+          <div class="form-grp"><label>Adı Soyadı / Unvanı</label><input id="f-dav-ad" placeholder="[DAVACI ADI]"></div>
+          <div class="fg2">
+            <div class="form-grp"><label>T.C. / Vergi No</label><input id="f-dav-tc" placeholder="[TC/Vergi No]"></div>
+            <div class="form-grp"><label>Vekil</label><input id="f-dav-vek" placeholder="Av. [VEKİL ADI]"></div>
+          </div>
+          <div class="fsec">👤 Davalı</div>
+          <div class="form-grp"><label>Adı Soyadı / Unvanı</label><input id="f-dal-ad" placeholder="[DAVACI ADI]"></div>
+          <div class="fg2">
+            <div class="form-grp"><label>T.C. / Vergi No</label><input id="f-dal-tc" placeholder="[TC/Vergi No]"></div>
+            <div class="form-grp"><label>Vekil</label><input id="f-dal-vek" placeholder="Av. [VEKİL ADI]"></div>
+          </div>
+        </div>
+        <div class="ftab-pane" id="ft1">
+          <div class="form-grp"><label>Dava Türü</label>
+            <select id="f-dava-turu">
+              <optgroup label="ALACAK & TAZMİNAT">
+                <option value="sozlesme">Sözleşmeden Doğan Tazminat</option>
+                <option value="haksiz">Haksız Fiil Tazminatı</option>
+                <option value="manevi">Manevi Tazminat</option>
+                <option value="alacak">Alacak Davası</option>
+                <option value="itiraz-iptal">İtirazın İptali (İİK m.67)</option>
+                <option value="menfi">Menfi Tespit (İİK m.72)</option>
+              </optgroup>
+              <optgroup label="TAŞINMAZ">
+                <option value="tapu-iptal">Tapu İptali ve Tescil</option>
+                <option value="zamanasiimi">Kazandırıcı Zamanaşımı</option>
+                <option value="irtifak">İrtifak / Geçit Hakkı</option>
+                <option value="tapu-duz">Tapu Kaydı Düzeltimi</option>
+                <option value="izale">Ortaklığın Giderilmesi</option>
+              </optgroup>
+              <optgroup label="AİLE">
+                <option value="bosanma">Boşanma Davası</option>
+                <option value="nafaka">Nafaka Davası</option>
+                <option value="velayet">Velayet Davası</option>
+              </optgroup>
+              <optgroup label="NÜFUS">
+                <option value="ad-soyad">Ad Soyad Düzeltimi</option>
+                <option value="yas">Yaş Düzeltimi</option>
+                <option value="nesep">Nesep / Soybağı</option>
+              </optgroup>
+              <optgroup label="İŞ">
+                <option value="kidem">Kıdem + İhbar Tazminatı</option>
+                <option value="iade">Feshin Geçersizliği / İşe İade</option>
+              </optgroup>
+              <optgroup label="TİCARET">
+                <option value="marka">Marka / Patent İhlali</option>
+                <option value="sirket">Şirket Feshi</option>
+              </optgroup>
+            </select>
+          </div>
+          <div id="f-ozel-alan"></div>
+          <div class="fg2">
+            <div class="form-grp"><label>Mahkeme Türü</label>
+              <select id="f-mhk-tur">
+                <option value="asliye">Asliye Hukuk (min 45.000 TL)</option>
+                <option value="sulh">Sulh Hukuk (min 30.000 TL)</option>
+                <option value="aile">Aile Mahkemesi (min 35.000 TL)</option>
+                <option value="is">İş Mahkemesi (min 35.000 TL)</option>
+                <option value="ticaret">Ticaret Mahkemesi (min 45.000 TL)</option>
+                <option value="icra">İcra Hukuk (min 9.000 TL)</option>
+              </select>
+            </div>
+            <div class="form-grp"><label>Faiz Başlangıcı</label><input id="f-faiz" type="date"></div>
+          </div>
+          <div class="fg3">
+            <div class="form-grp"><label>Dava Değeri (TL)</label><input id="f-deger" type="number" placeholder="0"></div>
+            <div class="form-grp"><label>Kabul Edilen (TL)</label><input id="f-kabul" type="number" placeholder="0"></div>
+            <div class="form-grp"><label>Reddedilen (TL)</label><input id="f-red" type="number" readonly style="background:#f0f0f0"></div>
+          </div>
+          <div class="form-grp"><label>Bilirkişi Ücreti (TL)</label><input id="f-bilirkisi" type="number" placeholder="0"></div>
+          <div class="fsec">🧮 Hesaplama (2024)</div>
+          <div class="hesap-blk">
+            <div class="hb-r"><span class="hb-l">Nispi Harç (Tam)</span><span class="hb-v" id="h-nispi">—</span></div>
+            <div class="hb-r"><span class="hb-l">Peşin Harç (¼)</span><span class="hb-v" id="h-pesin">—</span></div>
+            <div class="hb-r"><span class="hb-l">Bakiye Harç (¾)</span><span class="hb-v" id="h-bakiye">—</span></div>
+            <div class="hb-r"><span class="hb-l">Kabul Oranı</span><span class="hb-v hb-g" id="h-oran">—</span></div>
+            <div class="hb-r"><span class="hb-l">Vekâlet (Davacı)</span><span class="hb-v hb-g" id="h-vek-d">—</span></div>
+            <div class="hb-r"><span class="hb-l">Vekâlet (Davalı)</span><span class="hb-v hb-r2" id="h-vek-dal">—</span></div>
+            <div class="hb-r"><span class="hb-l">Yargılama Gideri</span><span class="hb-v" id="h-gider">—</span></div>
+          </div>
+          <div id="yargi-yolu-alan"></div>
+        </div>
+        <div class="ftab-pane" id="ft2">
+          <div class="form-grp"><label>Davacı İddia Özeti</label><textarea id="f-iddia" placeholder="Davacı vekili dava dilekçesinde; ..."></textarea></div>
+          <div class="form-grp"><label>Davalı Savunma Özeti</label><textarea id="f-savunma" placeholder="Davalı vekili cevap dilekçesinde; ..."></textarea></div>
+          <div class="form-grp"><label>Delil Değerlendirmesi & Gerekçe</label><textarea id="f-gerekce" placeholder="Mahkememizce yürütülen inceleme sonucunda; ..." style="min-height:90px"></textarea></div>
+          <div class="form-grp"><label>Kanuni Dayanak</label><textarea id="f-kanun" style="min-height:55px"></textarea></div>
+        </div>
+      </div>
+      <div class="hk-preview">
+        <div class="karar-kag" id="karar-kagit">
+          <div class="kk-tc">T.C.</div>
+          <div class="kk-mhk" id="kk-mhk">[ MAHKEME ADI ]</div>
+          <div class="kk-bilgi">
+            <span style="font-weight:700">ESAS NO</span><span id="kk-esas">: …</span>
+            <span style="font-weight:700">KARAR NO</span><span id="kk-kno">: …</span>
+            <span style="font-weight:700">HÂKİM</span><span id="kk-hakim">: …</span>
+            <span style="font-weight:700">KÂTİP</span><span id="kk-katip">: …</span>
+            <span style="font-weight:700">TARİH</span><span id="kk-tarih">: …</span>
+          </div>
+          <hr style="border:none;border-top:1px solid #ccc;margin:11px 0">
+          <div class="kk-bilgi">
+            <span style="font-weight:700">DAVACI</span><span id="kk-dav">: …</span>
+            <span style="font-weight:700">VEKİLİ</span><span id="kk-dav-vek">: …</span>
+            <span style="font-weight:700">DAVALI</span><span id="kk-dal">: …</span>
+            <span style="font-weight:700">VEKİLİ</span><span id="kk-dal-vek">: …</span>
+            <span style="font-weight:700">DAVA</span><span id="kk-dava-ad">: …</span>
+            <span style="font-weight:700">DEĞERİ</span><span id="kk-deger">: …</span>
+          </div>
+          <hr style="border:none;border-top:1px solid #ccc;margin:11px 0">
+          <div class="kk-baslik">TARAFLARIN İDDİA VE SAVUNMALARININ ÖZETİ</div>
+          <p class="kk-metin" id="kk-iddia"><span class="ph">← Gerekçe sekmesinden doldurun</span></p>
+          <p class="kk-metin" id="kk-savunma"></p>
+          <div class="kk-baslik">DELİLLERİN DEĞERLENDİRİLMESİ VE GEREKÇE</div>
+          <p class="kk-metin" id="kk-gerekce"><span class="ph">← Gerekçe sekmesinden doldurun</span></p>
+          <div class="kk-kanun"><strong>📚 Kanuni Dayanak:</strong> <span id="kk-kanun">…</span></div>
+          <div class="hukum-box">
+            <div class="hukum-ttl">H Ü K Ü M</div>
+            <p style="text-align:center;font-size:10px;color:#888;margin-bottom:9px;font-family:sans-serif">Yukarıda açıklanan gerekçe ile;</p>
+            <div id="kk-hukum"><div class="hi ph">← Dava türü ve değer giriniz</div></div>
+          </div>
+          <div class="imza-row">
+            <div class="imza-blk"><div class="imza-cizgi"></div><small>KÂTİP<br><span id="kk-katip-imza">…</span></small></div>
+            <div class="imza-blk"><strong id="kk-tarih-imza">…</strong></div>
+            <div class="imza-blk"><div class="imza-cizgi"></div><small>HÂKİM<br><span id="kk-hakim-imza">…</span></small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- KARAR ÖRNEKLERİ -->
+<div class="page" id="page-ornekler">
+  <div class="pg-hd">
+    <span class="pg-ico">📋</span>
+    <div><h1>Karar Örnekleri</h1><p>Hüküm, Taşınmaz, Nüfus, İcra, Tazminat</p></div>
+    <div class="pg-acts"><button class="pg-btn gold" id="btn-orn-yazdir">🖨 Yazdır</button></div>
+  </div>
+  <div style="flex:1;overflow:hidden">
+    <div class="orn-layout" style="height:100%">
+      <div class="orn-liste" id="ornek-liste"></div>
+      <div class="orn-icerik" id="ornek-icerik">
+        <div style="padding:40px;text-align:center;color:var(--muted)">
+          <div style="font-size:44px;margin-bottom:10px">📋</div>
+          <div style="font-size:12px">Soldan bir örnek seçin</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HESAPLAMA -->
+<div class="page" id="page-hesaplama">
+  <div class="pg-hd"><span class="pg-ico">🧮</span><div><h1>Hesaplama Araçları</h1><p>2024 Tarife — Harç, Vekâlet, İnkar, Faiz</p></div></div>
+  <div class="pg-body">
+    <div class="hesap-grid">
+      <div class="hk"><div class="hk-head">⚖️ Yargılama Harcı (2024)</div><div class="hk-body">
+        <div class="form-grp"><label>Dava Değeri (TL)</label><input type="number" id="c-deger" placeholder="250000"></div>
+        <div class="form-grp"><label>Dava Türü</label><select id="c-tur"><option value="nispi">Çekişmeli — Nispi (%6.831)</option><option value="maktu">Maktu (Nüfus/Boşanma)</option><option value="tapu">Tapu Tescil (%4.55)</option><option value="is">İş Mahkemesi (%5.09)</option></select></div>
+        <div class="form-grp"><label>Kabul Oranı (%)</label><input type="number" id="c-oran" value="100" min="0" max="100"></div>
+        <button class="calc-btn" id="btn-calc-harc">🧮 HARÇ HESAPLA</button>
+        <div class="sonuc" id="s-harc">
+          <div class="s-r"><span class="s-l">Tam Nispi Harç</span><span class="s-v" id="sh-nispi">—</span></div>
+          <div class="s-r"><span class="s-l">Peşin Harç (¼)</span><span class="s-v" id="sh-pesin">—</span></div>
+          <div class="s-r"><span class="s-l">Bakiye Harç (¾)</span><span class="s-v" id="sh-bakiye">—</span></div>
+          <div class="s-r"><span class="s-l">Kabul Oranına Göre</span><span class="s-v s-top" id="sh-kabul">—</span></div>
+          <div class="uyari">* 2024 tarife tahminidir.</div>
+        </div>
+      </div></div>
+      <div class="hk"><div class="hk-head">👨‍⚖️ Vekâlet Ücreti (AVK 2024)</div><div class="hk-body">
+        <div class="form-grp"><label>Kabul Edilen (TL)</label><input type="number" id="v-kabul" placeholder="120000"></div>
+        <div class="form-grp"><label>Reddedilen (TL)</label><input type="number" id="v-red" value="0"></div>
+        <div class="form-grp"><label>Mahkeme Türü</label><select id="v-mhk"><option value="asliye">Asliye Hukuk (min 45.000 TL)</option><option value="sulh">Sulh Hukuk (min 30.000 TL)</option><option value="aile">Aile Mahkemesi (min 35.000 TL)</option><option value="is">İş Mahkemesi (min 35.000 TL)</option><option value="ticaret">Ticaret Mah. (min 45.000 TL)</option><option value="icra">İcra Dairesi (min 9.000 TL)</option></select></div>
+        <button class="calc-btn" id="btn-calc-vekalet">🧮 VEKÂLET HESAPLA</button>
+        <div class="sonuc" id="s-vekalet">
+          <div class="s-r"><span class="s-l">Davacı Vekâlet</span><span class="s-v s-top" id="sv-dav">—</span></div>
+          <div class="s-r"><span class="s-l">Davalı Vekâlet</span><span class="s-v" id="sv-dal">—</span></div>
+          <div class="s-r"><span class="s-l">Net Durum</span><span class="s-v" id="sv-net">—</span></div>
+          <div class="uyari">* AVK 2024 asgari tarifesi.</div>
+        </div>
+      </div></div>
+      <div class="hk"><div class="hk-head">💳 İnkar / Kötüniyet Tazminatı (İİK m.67)</div><div class="hk-body">
+        <div class="form-grp"><label>Takip / Alacak Tutarı (TL)</label><input type="number" id="i-takip" placeholder="80000"></div>
+        <div class="form-grp"><label>Tür</label><select id="i-tur"><option value="inkar">İnkar Taz. — %20 (Borçlu aleyhine)</option><option value="kotu">Kötüniyet Taz. — %20 (Alacaklı aleyhine)</option></select></div>
+        <button class="calc-btn" id="btn-calc-inkar">🧮 HESAPLA</button>
+        <div class="sonuc" id="s-inkar">
+          <div class="s-r"><span class="s-l">Takip Tutarı</span><span class="s-v" id="si-tak">—</span></div>
+          <div class="s-r"><span class="s-l">Tazminat (%20)</span><span class="s-v s-top" id="si-taz">—</span></div>
+          <div class="s-r"><span class="s-l">Toplam</span><span class="s-v" id="si-top">—</span></div>
+        </div>
+      </div></div>
+      <div class="hk"><div class="hk-head">📊 Faiz Hesaplama</div><div class="hk-body">
+        <div class="form-grp"><label>Ana Para (TL)</label><input type="number" id="faiz-ana" placeholder="50000"></div>
+        <div class="fg2">
+          <div class="form-grp"><label>Başlangıç</label><input type="date" id="faiz-bas"></div>
+          <div class="form-grp"><label>Bitiş</label><input type="date" id="faiz-bit"></div>
+        </div>
+        <div class="form-grp"><label>Faiz Türü</label><select id="faiz-tur"><option value="yasal">Yasal Faiz (%24 — 2024+)</option><option value="tcmb">TCMB Avans (%36 — 2026)</option><option value="ticari">Ticari Faiz (%36 — 2026)</option></select></div>
+        <button class="calc-btn" id="btn-calc-faiz">🧮 FAİZ HESAPLA</button>
+        <div class="sonuc" id="s-faiz">
+          <div class="s-r"><span class="s-l">Gün Sayısı</span><span class="s-v" id="sf-gun">—</span></div>
+          <div class="s-r"><span class="s-l">Faiz Tutarı</span><span class="s-v s-top" id="sf-faiz">—</span></div>
+          <div class="s-r"><span class="s-l">Ana + Faiz</span><span class="s-v" id="sf-top">—</span></div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ÜST YARGI -->
+<div class="page" id="page-ustyargi">
+  <div class="pg-hd"><span class="pg-ico">📤</span><div><h1>Üst Yargı Yolu Rehberi</h1><p>İstinaf • Temyiz • AYM • AİHM + Süre Hesaplayıcı</p></div></div>
+  <div class="pg-body">
+    <div class="uy-grid">
+      <div class="uy-kart"><div class="uy-head ist">🏛️ İSTİNAF (BAM)</div><div class="uy-body">
+        <div class="uy-r"><div class="uy-l">SÜRE</div><div><strong>2 hafta</strong> — Tebliğden</div></div>
+        <div class="uy-r"><div class="uy-l">SINIR</div><div><strong>28.000 TL</strong> üzeri (2024)</div></div>
+        <div class="uy-r"><div class="uy-l">HARÇ</div><div>Maktu ~3.400 TL</div></div>
+        <div class="uy-r"><div class="uy-l">YÖNTEM</div><div>İlk derece mah. dilekçe</div></div>
+        <div class="uy-r"><div class="uy-l">YASAL</div><div>HMK m.341-360</div></div>
+      </div></div>
+      <div class="uy-kart"><div class="uy-head tem">🔺 TEMYİZ (Yargıtay)</div><div class="uy-body">
+        <div class="uy-r"><div class="uy-l">SÜRE</div><div><strong>2 ay</strong> — BAM kararından</div></div>
+        <div class="uy-r"><div class="uy-l">SINIR</div><div><strong>238.730 TL</strong> üzeri (2024)</div></div>
+        <div class="uy-r"><div class="uy-l">HARÇ</div><div>Nispi (%0.45)</div></div>
+        <div class="uy-r"><div class="uy-l">YÖNTEM</div><div>BAM'a dilekçe</div></div>
+        <div class="uy-r"><div class="uy-l">YASAL</div><div>HMK m.361-374</div></div>
+      </div></div>
+      <div class="uy-kart"><div class="uy-head aym">⚖️ AYM Bireysel Başvuru</div><div class="uy-body">
+        <div class="uy-r"><div class="uy-l">SÜRE</div><div><strong>30 gün</strong> — Nihai karardan</div></div>
+        <div class="uy-r"><div class="uy-l">KOŞUL</div><div>İç yollar tüketilmiş olmalı</div></div>
+        <div class="uy-r"><div class="uy-l">HARÇ</div><div>Yok — Ücretsiz</div></div>
+        <div class="uy-r"><div class="uy-l">YÖNTEM</div><div>AYM — e-Devlet</div></div>
+        <div class="uy-r"><div class="uy-l">YASAL</div><div>Anayasa m.148/3</div></div>
+      </div></div>
+      <div class="uy-kart"><div class="uy-head aihm">🇪🇺 AİHM (Strazburg)</div><div class="uy-body">
+        <div class="uy-r"><div class="uy-l">SÜRE</div><div><strong>4 ay</strong> — Nihai iç karardan</div></div>
+        <div class="uy-r"><div class="uy-l">KOŞUL</div><div>AYM dahil iç yollar tüketilmiş</div></div>
+        <div class="uy-r"><div class="uy-l">HARÇ</div><div>Yok — Ücretsiz</div></div>
+        <div class="uy-r"><div class="uy-l">YÖNTEM</div><div>echr.coe.int online form</div></div>
+      </div></div>
+    </div>
+    <div class="sure-kart">
+      <div class="sure-head">📅 Son Başvuru Tarihi Hesaplayıcı</div>
+      <div class="sure-body">
+        <div class="form-grp"><label>Karar Tebliğ Tarihi</label><input type="date" id="sc-teblig"></div>
+        <div class="form-grp"><label>Yargı Yolu</label><select id="sc-yol"><option value="14">İstinaf (2 hafta)</option><option value="60">Temyiz (2 ay)</option><option value="30">AYM (30 gün)</option><option value="120">AİHM (4 ay)</option></select></div>
+        <div><button class="calc-btn" id="btn-calc-sure">📅 Son Tarihi Hesapla</button></div>
+      </div>
+      <div class="sure-sonuc" id="sc-sonuc"></div>
+    </div>
+  </div>
+</div>
+
+<!-- KAYITLI BELGELER -->
+<div class="page" id="page-kayitli">
+  <div class="pg-hd"><span class="pg-ico">💾</span><div><h1>Kayıtlı Belgeler</h1><p>Oluşturulan dilekçe ve kararlar (Tarayıcı deposunda)</p></div>
+    <div class="pg-acts">
+      <button class="pg-btn" id="btn-belge-yenile">🔄 Yenile</button>
+      <button class="pg-btn" id="btn-belge-export">📥 Tümünü İndir</button>
+    </div>
+  </div>
+  <div class="pg-body"><div class="belge-grid" id="belge-listesi"></div></div>
+</div>
+
+</div><!-- /content -->
+</div><!-- /app -->
+
+<div id="statusbar">
+  <div class="sb-chip"><div class="dot"></div><span id="sb-aktif">Ana Sayfa</span></div>
+  <div class="sb-chip"><div class="dot"></div><span id="sb-dava-tur">—</span></div>
+  <div class="sb-chip"><div class="dot"></div><span id="sb-hesap">—</span></div>
+  <div class="sb-chip" style="margin-left:auto"><span id="sb-ver">Hukuk Pro v1.0.2 Web — 2024</span></div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
