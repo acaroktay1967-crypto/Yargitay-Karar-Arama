@@ -103,18 +103,18 @@ function buildKabul() {
   let n=1;
   const h = [
     hItem(n++,KC,'Davanın <strong>KABULÜNE</strong>'),
-    hItem(n++,TC,'<strong>320.000,00 TL</strong> tazminatın dava tarihi [TARİH]\'den yasal faiziyle davalıdan tahsiline'),
+    hItem(n++,TC,'<strong>320.000,00 TL</strong> tazminatın dava tarihinden yasal faiziyle davalıdan tahsiline'),
     hItem(n++,TC,'<strong>21.859,20 TL</strong> yargılama harcının davalıdan tahsiline'),
     hItem(n++,TC,'<strong>8.430,00 TL</strong> yargılama giderinin davalıdan alınarak davacıya verilmesine'),
     hItem(n++,TC,'<strong>32.000,00 TL</strong> vekâlet ücretinin davalıdan alınarak davacıya verilmesine'),
-    hItem(n++,YC,'Tebliğden itibaren <strong>2 hafta</strong> içinde İstanbul BAM nezdinde <strong>İSTİNAF YOLU AÇIK</strong> olmak üzere'),
+    hItem(n++,YC,'Tebliğden itibaren <strong>2 hafta</strong> içinde ilgili BAM nezdinde <strong>İSTİNAF YOLU AÇIK</strong> olmak üzere'),
     `<div style="font-weight:800;background:#f9f5ea;padding:8px 0;font-size:12px">Karar verildi. <span style="float:right;font-weight:400;color:#888">[TARİH]</span></div>`
   ].join('');
   return kararSargi('[İL] [NO]. ASLİYE HUKUK MAHKEMESİ','20XX/XXXX Esas','20XX/XXX Karar',
     '[HÂKİM ADI] ([SİCİL])','[DAVACI ADI]','[DAVALI ŞİRKET]','Sözleşmeden Doğan Tazminat','320.000,00 TL',
-    'Davacı vekili dava dilekçesinde; müvekkili ile davalı şirket arasında [TARİH] tarihinde akdedilen inşaat sözleşmesi uyarınca 350.000 TL ödeme yapıldığını, sözleşme gereği [TARİH] tarihine kadar teslim edilmesi gereken konutun teslim edilmediğini, bu nedenle 320.000 TL tazminat talep etmiştir.',
+    'Davacı vekili dava dilekçesinde; müvekkili ile davalı şirket arasında akdedilen inşaat sözleşmesi uyarınca ödeme yapıldığını, sözleşme gereği teslim edilmesi gereken konutun teslim edilmediğini, bu nedenle tazminat talep etmiştir.',
     'Davalı vekili; teslim gecikmesinin mücbir sebepten kaynaklandığını ileri sürerek davanın reddini talep etmiştir.',
-    'Bilirkişi raporu ([TARİH]) incelendiğinde gecikmede davalı kusuru bulunduğu, mücbir sebebin şartlarının oluşmadığı anlaşılmıştır.',
+    'Bilirkişi raporu incelendiğinde gecikmede davalı kusuru bulunduğu, mücbir sebebin şartlarının oluşmadığı anlaşılmıştır.',
     'TBK m.112, m.117-126, HMK m.26, m.326', h, '[KÂTİP ADI]','[TARİH]','[HÂKİM ADI] — [SİCİL]');
 }
 
@@ -129,7 +129,7 @@ function buildRed() {
   ].join('');
   return kararSargi('[İL] [NO]. ASLİYE HUKUK MAHKEMESİ','20XX/XXXX','20XX/XXXX',
     '[HÂKİM ADI] ([SİCİL])','[DAVACI ADI]','[DAVALI ŞİRKET]','Ayıplı Mal Tazminatı','85.000,00 TL',
-    'Davacı; satın aldığı buzdolabının 3 ay içinde arızalandığını, garanti kapsamı dışında tutulduğunu ileri sürerek tazminat talep etmiştir.',
+    'Davacı; satın aldığı ürünün kısa süre içinde arızalandığını, garanti kapsamı dışında tutulduğunu ileri sürerek tazminat talep etmiştir.',
     'Davalı; arızanın kullanıcı hatasından kaynaklandığını savunmuştur.',
     'Bilirkişi incelemesi sonucunda arızanın üretim hatasından değil kullanıcı hatasından kaynaklandığı tespit edilmiştir.',
     'TBK m.219, m.227, 6502 K. m.56', h, '[KÂTİP ADI]','[TARİH]','[HÂKİM ADI] — [SİCİL]');
@@ -148,17 +148,17 @@ function buildKismen() {
   ].join('');
   return kararSargi('[İL] [NO]. ASLİYE HUKUK MAHKEMESİ','20XX/XXX','20XX/XXX',
     '[HÂKİM ADI] ([SİCİL])','[DAVACI ADI]','[DAVALI ŞİRKET]','Kişilik Hakkı İhlali — Manevi Tazminat','250.000,00 TL (Talep)',
-    'Davacı; davalı yayın organının yayımladığı haberin kişilik haklarını ihlal ettiğini, 50.000 TL maddi + 200.000 TL manevi tazminat talep etmiştir.',
+    'Davacı; davalı yayın organının yayımladığı haberin kişilik haklarını ihlal ettiğini, maddi + manevi tazminat talep etmiştir.',
     'Davalı; yayının gerçek ve kamu yararına ilişkin olduğunu savunmuştur.',
-    'Kişilik hakkı ihlali sabit olmakla birlikte maddi zarar için yeterli delil sunulamamıştır. Manevi tazminat hakkaniyet ilkesi çerçevesinde 75.000 TL olarak takdir edilmiştir.',
-    'TMK m.24-25, TBK m.58, HMK m.327', h, 'Kâtip','[TARİH]','[HÂKİM ADI] — [SİCİL]');
+    'Kişilik hakkı ihlali sabit olmakla birlikte maddi zarar için yeterli delil sunulamamıştır. Manevi tazminat hakkaniyet ilkesi çerçevesinde takdir edilmiştir.',
+    'TMK m.24-25, TBK m.58, HMK m.327', h, '[KÂTİP ADI]','[TARİH]','[HÂKİM ADI] — [SİCİL]');
 }
 
 function buildNafaka() {
   let n=1;
   const h = [
     hItem(n++,KC,'Davanın <strong>KABULÜNE</strong>'),
-    hItem(n++,TC,'Müşterek çocuk <strong>[ÇOCUK]</strong> için aylık <strong>8.500,00 TL İŞTİRAK NAFAKASINA</strong>'),
+    hItem(n++,TC,'Müşterek çocuk için aylık <strong>8.500,00 TL İŞTİRAK NAFAKASINA</strong>'),
     `<div style="padding:6px 0;border-bottom:1px dotted #d4c5a0;font-size:12px;line-height:1.7"><strong>${n++}.</strong> Her yılın Ocak ayında TÜFE artış oranında artırılmasına</div>`,
     `<div style="padding:6px 0;border-bottom:1px dotted #d4c5a0;font-size:12px;line-height:1.7"><strong>${n++}.</strong> Her ayın 1. günü banka havalesi ile ödenmesine</div>`,
     hItem(n++,TC,'Maktu harç <strong>680,00 TL</strong> davacıdan tahsiline; <strong>5.100,00 TL</strong> vekâlet ücreti davalıdan davacıya'),
@@ -167,10 +167,10 @@ function buildNafaka() {
   ].join('');
   return kararSargi('[İL] [NO]. AİLE MAHKEMESİ','20XX/XXX','20XX/XXX',
     '[HÂKİM ADI] ([SİCİL])','[DAVACI ADI]','[DAVALI ADI]','İştirak Nafakası','—',
-    'Davacı vekili; müşterek çocuk Defne için aylık 8.500 TL iştirak nafakası talep etmiştir.',
+    'Davacı vekili; müşterek çocuk için aylık iştirak nafakası talep etmiştir.',
     'Davalı; talep edilen tutarın fazla olduğunu savunmuştur.',
     'Tarafların ekonomik durumları ve çocuğun ihtiyaçları gözetilerek nafaka miktarı belirlenmiştir.',
-    'TMK m.182/2, m.176', h, 'Kâtip','[TARİH]','[HÂKİM ADI] — [SİCİL]');
+    'TMK m.182/2, m.176', h, '[KÂTİP ADI]','[TARİH]','[HÂKİM ADI] — [SİCİL]');
 }
 
 function buildTapuIptal() {
@@ -178,8 +178,8 @@ function buildTapuIptal() {
   const h = [
     hItem(n++,KC,'Davanın <strong>KABULÜNE</strong>'),
     hItem(n++,RC,'<strong>[İL/İLÇE] [XXXX] Ada, [XX] Parsel</strong> taşınmazın davalı adına olan tapu kaydının <strong>İPTALİNE</strong>'),
-    hItem(n++,KC,'Taşınmazın davacı <strong>[DAVACI ADI]</strong> adına <strong>TESCİLİNE</strong>'),
-    `<div style="padding:6px 0;border-bottom:1px dotted #d4c5a0;font-size:12px;line-height:1.7"><strong>${n++}.</strong> Konya Tapu Sicil Müdürlüğü'ne tescil müzekkeresi yazılmasına</div>`,
+    hItem(n++,KC,'Taşınmazın davacı adına <strong>TESCİLİNE</strong>'),
+    `<div style="padding:6px 0;border-bottom:1px dotted #d4c5a0;font-size:12px;line-height:1.7"><strong>${n++}.</strong> İlgili Tapu Sicil Müdürlüğü'ne tescil müzekkeresi yazılmasına</div>`,
     hItem(n++,TC,'<strong>38.720,00 TL</strong> yargılama harcı davalıdan tahsiline'),
     hItem(n++,TC,'<strong>28.500,00 TL</strong> vekâlet ücreti davalıdan alınarak davacıya verilmesine'),
     hItem(n++,YC,'Tebliğden <strong>2 hafta</strong> İstinaf yolu açık olmak üzere'),
@@ -190,7 +190,7 @@ function buildTapuIptal() {
     'Davacı vekili; davalının hile ile vekâletnameyi kullanarak taşınmazı kendi adına tescil ettirdiğini ileri sürmüştür.',
     'Davalı vekili; devrin yasal yollarla gerçekleştiğini, iyiniyetli iktisabın korunması gerektiğini savunmuştur.',
     'Grafoloji bilirkişi raporu imzanın davacıya ait olmadığını ortaya koymuştur; TMK m.1023 uygulama imkânı bulunmamaktadır.',
-    'TMK m.705, m.1023, TBK m.36, Tapu K. m.26', h, 'Kâtip','[TARİH]','[HÂKİM ADI] — [SİCİL]');
+    'TMK m.705, m.1023, TBK m.36, Tapu K. m.26', h, '[KÂTİP ADI]','[TARİH]','[HÂKİM ADI] — [SİCİL]');
 }
 
 function buildInkar() {
@@ -206,10 +206,10 @@ function buildInkar() {
   ].join('');
   return kararSargi('[İL] [NO]. ASLİYE HUKUK MAHKEMESİ','20XX/XXXX','20XX/XXXX',
     '[HÂKİM ADI] ([SİCİL])','[DAVACI ADI]','[DAVALI ADI]','İtirazın İptali (İİK m.67)','120.000,00 TL',
-    'Davacı; 120.000 TL kira alacağı için başlattığı icra takibine haksız itiraz yapıldığını ileri sürerek itirazın iptali ve inkar tazminatı talep etmiştir.',
+    'Davacı; kira alacağı için başlattığı icra takibine haksız itiraz yapıldığını ileri sürerek itirazın iptali ve inkar tazminatı talep etmiştir.',
     'Davalı; kira alacağının ödendiğini, sözleşmenin sona erdiğini savunmuştur.',
     'Kira sözleşmesi ve banka kayıtları incelenmiş; alacağın gerçek ve muaccel olduğu, itirazın kötüniyetle yapıldığı anlaşılmıştır.',
-    'İİK m.67/1, m.67/2, HMK m.326', h, 'Kâtip','[TARİH]','[HÂKİM ADI] — [SİCİL]');
+    'İİK m.67/1, m.67/2, HMK m.326', h, '[KÂTİP ADI]','[TARİH]','[HÂKİM ADI] — [SİCİL]');
 }
 
 /* ── ORNEKLER nesnesi ── */
