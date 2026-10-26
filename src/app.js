@@ -37,6 +37,88 @@ function matchesOffenseType(value, offenseTypeFilter) {
   return normalizeText(value).includes(normalizedFilter);
 }
 
+function decorateDecisionWithLinks(decision) {
+  const encodedId = encodeURIComponent(decision.id);
+  return {
+    ...decision,
+    detailUrl: `/api/decisions/${encodedId}`,
+    shareUrl: `/decisions/${encodedId}/share`,
+  };
+}
+
+function escapeHtml(value) {
+  return String(value || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+function renderSharePage(decision) {
+  const safeId = escapeHtml(decision.id);
+  const safeSummary = escapeHtml(decision.summary);
+  const safeContent = escapeHtml(decision.content);
+  const safeChamber = escapeHtml(decision.chamber);
+  const safeOffenseType = escapeHtml(decision.offenseType);
+  const safeLawArticles = (decision.lawArticles || [])
+    .map((article) => escapeHtml(article))
+    .join(", ");
+
+  return `<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Karar Paylaş - ${safeId}</title>
+  </head>
+  <body>
+    <h1>${safeId}</h1>
+    <p><strong>Daire:</strong> ${safeChamber}</p>
+    <p><strong>Yıl:</strong> ${decision.year}</p>
+    <p><strong>Suç Türü:</strong> ${safeOffenseType}</p>
+    <p><strong>Kanun Maddeleri:</strong> ${safeLawArticles}</p>
+    <p>${safeSummary}</p>
+    <button id="select-all" type="button">Tümünü Seç</button>
+    <button id="share" type="button">Kararı Paylaş</button>
+    <p>Karar metnine tıklayarak tamamını seçebilirsiniz.</p>
+    <textarea id="decision-content" rows="16" cols="120" readonly>${safeContent}</textarea>
+    <script>
+      const content = document.getElementById("decision-content");
+      const selectAllButton = document.getElementById("select-all");
+      const shareButton = document.getElementById("share");
+
+      function selectAllText() {
+        content.focus();
+        content.select();
+      }
+
+      selectAllButton.addEventListener("click", selectAllText);
+      content.addEventListener("click", selectAllText);
+
+      shareButton.addEventListener("click", async () => {
+        if (navigator.share) {
+          await navigator.share({
+            title: document.title,
+            text: content.value,
+            url: window.location.href,
+          });
+          return;
+        }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(window.location.href);
+          alert("Paylaşım bağlantısı kopyalandı.");
+          return;
+        }
+
+        selectAllText();
+      });
+    </script>
+  </body>
+</html>`;
+}
+
 function filterDecisions(items, { q, offenseType, chamber, year }) {
   return items.filter((decision) => {
     if (!matchesOffenseType(decision.offenseType, offenseType)) return false;
@@ -80,13 +162,32 @@ function createApp() {
 
     const start = (page - 1) * pageSize;
     const end = start + pageSize;
+    const pagedItems = filtered.slice(start, end).map(decorateDecisionWithLinks);
 
     res.json({
       total: filtered.length,
       page,
       pageSize,
-      items: filtered.slice(start, end),
+      items: pagedItems,
     });
+  });
+
+  app.get("/api/decisions/:id", (req, res) => {
+    const decision = decisions.find((item) => item.id === req.params.id);
+    if (!decision) {
+      return res.status(404).json({ error: "Karar bulunamadı." });
+    }
+
+    res.json(decorateDecisionWithLinks(decision));
+  });
+
+  app.get("/decisions/:id/share", (req, res) => {
+    const decision = decisions.find((item) => item.id === req.params.id);
+    if (!decision) {
+      return res.status(404).json({ error: "Karar bulunamadı." });
+    }
+
+    res.type("html").send(renderSharePage(decision));
   });
 
   return app;

@@ -20,6 +20,8 @@ test("decision search supports text query", async () => {
   assert.equal(response.status, 200);
   assert.equal(response.body.total, 1);
   assert.equal(response.body.items[0].offenseType, "Uyuşturucu Madde Ticareti");
+  assert.equal(response.body.items[0].shareUrl, "/decisions/2022-8CD-3310/share");
+  assert.equal(response.body.items[0].detailUrl, "/api/decisions/2022-8CD-3310");
 });
 
 test("decision search supports offense type (partial, case-insensitive) and year filters", async () => {
@@ -84,4 +86,32 @@ test("decision search rejects unrealistic future year values", async () => {
 
   assert.equal(response.status, 400);
   assert.match(response.body.error, /year/);
+});
+
+test("decision detail endpoint returns decision by id", async () => {
+  const app = createApp();
+  const response = await request(app).get("/api/decisions/2024-1CD-1001");
+
+  assert.equal(response.status, 200);
+  assert.equal(response.body.id, "2024-1CD-1001");
+  assert.equal(response.body.shareUrl, "/decisions/2024-1CD-1001/share");
+});
+
+test("decision detail endpoint returns 404 for unknown id", async () => {
+  const app = createApp();
+  const response = await request(app).get("/api/decisions/unknown-id");
+
+  assert.equal(response.status, 404);
+  assert.match(response.body.error, /Karar bulunamadı/);
+});
+
+test("decision share page returns html with select and share actions", async () => {
+  const app = createApp();
+  const response = await request(app).get("/decisions/2023-3CD-2044/share");
+
+  assert.equal(response.status, 200);
+  assert.match(response.headers["content-type"], /html/);
+  assert.match(response.text, /Tümünü Seç/);
+  assert.match(response.text, /Kararı Paylaş/);
+  assert.match(response.text, /textarea id="decision-content"/);
 });

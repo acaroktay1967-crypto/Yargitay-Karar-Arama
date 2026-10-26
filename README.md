@@ -40,11 +40,32 @@ npm test
 
 `GET /api/decisions`
 
+Yanıttaki her karar için şu alanlar da döner:
+- `detailUrl`: Karar detay API adresi
+- `shareUrl`: Kararın paylaşım sayfası adresi
+
 Örnek:
 
 ```bash
 curl "http://localhost:3000/api/decisions?q=uyu%C5%9Fturucu&offenseType=hirsiz&year=2022"
 ```
+
+### Karar detayı
+
+`GET /api/decisions/:id`
+
+Örnek:
+
+```bash
+curl "http://localhost:3000/api/decisions/2024-1CD-1001"
+```
+
+### Karar paylaşım sayfası
+
+`GET /decisions/:id/share`
+
+Bu sayfada karar metnine tıklayarak veya **Tümünü Seç** butonuyla metnin tamamı seçilebilir.
+**Kararı Paylaş** butonu destekleniyorsa cihazın paylaşım penceresini açar, değilse bağlantıyı kopyalar.
 
 ## Açık kaynak kaynaktan karar çekme ve suç türüne göre kaydetme
 
