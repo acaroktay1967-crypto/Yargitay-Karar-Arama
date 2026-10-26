@@ -65,6 +65,8 @@ curl "http://localhost:3000/api/decisions/2024-1CD-1001"
 `GET /decisions/:id/share`
 
 Bu sayfada karar metnine tıklayarak veya **Tümünü Seç** butonuyla metnin tamamı seçilebilir.
+**Kopyala** butonu karar metnini panoya kopyalar.
+**Kaydet (.txt)** butonu karar metnini indirilebilir dosya olarak kaydeder.
 **Kararı Paylaş** butonu destekleniyorsa cihazın paylaşım penceresini açar, değilse bağlantıyı kopyalar.
 
 ## Açık kaynak kaynaktan karar çekme ve suç türüne göre kaydetme

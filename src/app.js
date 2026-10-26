@@ -80,12 +80,16 @@ function renderSharePage(decision) {
     <p><strong>Kanun Maddeleri:</strong> ${safeLawArticles}</p>
     <p>${safeSummary}</p>
     <button id="select-all" type="button">Tümünü Seç</button>
+    <button id="copy" type="button">Kopyala</button>
+    <button id="save" type="button">Kaydet (.txt)</button>
     <button id="share" type="button">Kararı Paylaş</button>
     <p>Karar metnine tıklayarak tamamını seçebilirsiniz.</p>
-    <textarea id="decision-content" rows="16" cols="120" readonly>${safeContent}</textarea>
+    <textarea id="decision-content" data-decision-id="${safeId}" rows="16" cols="120" readonly>${safeContent}</textarea>
     <script>
       const content = document.getElementById("decision-content");
       const selectAllButton = document.getElementById("select-all");
+      const copyButton = document.getElementById("copy");
+      const saveButton = document.getElementById("save");
       const shareButton = document.getElementById("share");
 
       function selectAllText() {
@@ -93,7 +97,33 @@ function renderSharePage(decision) {
         content.select();
       }
 
+      async function copyDecisionText() {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(content.value);
+          alert("Karar metni kopyalandı.");
+          return;
+        }
+
+        selectAllText();
+      }
+
+      function saveDecisionText() {
+        const rawId = content.getAttribute("data-decision-id") || "karar";
+        const safeFileId = rawId.replace(/[^a-zA-Z0-9._-]/g, "_");
+        const blob = new Blob([content.value], { type: "text/plain;charset=utf-8" });
+        const objectUrl = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = objectUrl;
+        link.download = safeFileId + ".txt";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(objectUrl);
+      }
+
       selectAllButton.addEventListener("click", selectAllText);
+      copyButton.addEventListener("click", copyDecisionText);
+      saveButton.addEventListener("click", saveDecisionText);
       content.addEventListener("click", selectAllText);
 
       shareButton.addEventListener("click", async () => {

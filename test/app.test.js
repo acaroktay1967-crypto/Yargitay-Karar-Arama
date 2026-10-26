@@ -112,6 +112,8 @@ test("decision share page returns html with select and share actions", async () 
   assert.equal(response.status, 200);
   assert.match(response.headers["content-type"], /html/);
   assert.match(response.text, /Tümünü Seç/);
+  assert.match(response.text, /Kopyala/);
+  assert.match(response.text, /Kaydet \(\.txt\)/);
   assert.match(response.text, /Kararı Paylaş/);
   assert.match(response.text, /textarea id="decision-content"/);
 });
